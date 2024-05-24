@@ -34,7 +34,13 @@ class ApiController extends Controller
             $apiResult = $response->getBody()->getContents();
             $apiResult = json_decode($apiResult, true);
 
-            return response()->json($apiResult);
+          
+
+// Truy xuất thông tin từ trường "search_results"
+            $searchResults = $apiResult['search_results'];
+
+            return view('api_result', compact('searchResults'));
+            // return response()->json($apiResult);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
